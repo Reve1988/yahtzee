@@ -75,7 +75,7 @@ export default {
             this.$emit(EMIT_KEYS.ROLL, JSON.parse(JSON.stringify(this.diceList)))
         },
         getRandomDiceNumber() {
-            return Math.floor(Math.random() * 2) + 1;
+            return Math.floor(Math.random() * 6) + 1;
         },
     },
 }
