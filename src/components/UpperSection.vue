@@ -1,17 +1,21 @@
 <template>
-    <div>
+    <score-table title="Upper Section">
         <rule-box :rule="ace" @scoring="scoring"/>
         <rule-box :rule="tows" @scoring="scoring"/>
         <rule-box :rule="threes" @scoring="scoring"/>
         <rule-box :rule="fours" @scoring="scoring"/>
         <rule-box :rule="fives" @scoring="scoring"/>
         <rule-box :rule="sixes" @scoring="scoring"/>
-        Bonus : {{ bonus.score }} ({{ bonus.remain }})
-    </div>
+        <tr>
+            <th>Bonus</th>
+            <td>{{ bonus.score }} ({{ bonus.remain }})</td>
+        </tr>
+    </score-table>
 </template>
 
 <script>
 import RuleBox from "@/components/RuleBox.vue"
+import ScoreTable from "@/components/ScoreTable.vue";
 
 const EMIT_KEYS = {
     SCORING: "scoring",
@@ -20,6 +24,7 @@ const EMIT_KEYS = {
 export default {
     name: "UpperSection",
     components: {
+        ScoreTable,
         RuleBox,
     },
     props: {
@@ -113,7 +118,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-
-</style>

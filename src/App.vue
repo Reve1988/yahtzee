@@ -1,22 +1,33 @@
 <template>
-    Turn : {{ turnCount }} / {{ totalTurnCount }}
-    <br/>
-    <br/>
-    <dice-box :turn-count="turnCount" @roll="setDice"/>
-    <br/>
-    <br/>
-    <upper-section :dice-list="diceList" @scoring="upperScoring"/>
-    <br/>
-    <lower-section :dice-list="diceList" @scoring="lowerScoring"/>
-    <br/>
-    Score : {{ totalScore }}
-    <button v-if="turnCount === totalTurnCount" @click="refresh">다시하기</button>
+    <div class="warp">
+        <div class="dice-box">
+            <dice-box :turn-count="turnCount" @roll="setDice"/>
+        </div>
+        <div class="score-box">
+            <score-table>
+                <tr>
+                    <th>Turn</th>
+                    <td>{{ turnCount }} / {{ totalTurnCount }}</td>
+                </tr>
+            </score-table>
+            <upper-section :dice-list="diceList" @scoring="upperScoring"/>
+            <lower-section :dice-list="diceList" @scoring="lowerScoring"/>
+            <score-table>
+                <tr>
+                    <th>Total Score</th>
+                    <td>{{ totalScore }}</td>
+                </tr>
+            </score-table>
+            <button v-if="turnCount === totalTurnCount" @click="refresh">다시하기</button>
+        </div>
+    </div>
 </template>
 
 <script>
 import DiceBox from "@/components/DiceBox.vue";
 import UpperSection from "@/components/UpperSection.vue";
 import LowerSection from "@/components/LowerSection.vue";
+import ScoreTable from "@/components/ScoreTable.vue";
 
 export default {
     name: "YahtzeeApp",
@@ -24,6 +35,7 @@ export default {
         DiceBox,
         UpperSection,
         LowerSection,
+        ScoreTable,
     },
     data() {
         return {
@@ -57,6 +69,3 @@ export default {
     },
 }
 </script>
-
-<style scoped>
-</style>

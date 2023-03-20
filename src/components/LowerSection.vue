@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <score-table title="Lower Section">
         <rule-box :rule="threeOfAKind" @scoring="scoring"/>
         <rule-box :rule="fourOfAKind" @scoring="scoring"/>
         <rule-box :rule="fullHouse" @scoring="scoring"/>
@@ -7,10 +7,11 @@
         <rule-box :rule="largeStraight" @scoring="scoring"/>
         <rule-box :rule="chance" @scoring="scoring"/>
         <rule-box :rule="yahtzee" @scoring="scoring"/>
-    </div>
+    </score-table>
 </template>
 
 <script>
+import ScoreTable from "@/components/ScoreTable.vue";
 import RuleBox from "@/components/RuleBox.vue";
 
 const EMIT_KEYS = {
@@ -20,6 +21,7 @@ const EMIT_KEYS = {
 export default {
     name: "LowerSection",
     components: {
+        ScoreTable,
         RuleBox,
     },
     props: {

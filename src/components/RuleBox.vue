@@ -1,9 +1,13 @@
 <template>
-    <div>
-        {{ rule.name }} :
-        <button v-if="!complete" @click="scoring">+{{ rule.possiblePoint }}</button>
-        <span v-else>{{ rule.score }}</span><br/>
-    </div>
+    <tr>
+        <th>
+            {{ rule.name }}
+        </th>
+        <td>
+            <button v-if="!complete" @click="scoring">+{{ rule.possiblePoint }}</button>
+            <span v-else>{{ rule.score }}</span>
+        </td>
+    </tr>
 </template>
 
 <script>

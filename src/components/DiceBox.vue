@@ -1,13 +1,16 @@
 <template>
     <div>
-        <div v-for="dice in diceList">
-            <input type="checkbox" v-model="dice.selected"/>
-            <span>{{ dice.value }}</span>
+        <div>
+            <button @click="rollDice" :disabled="isNoRemainRollCount() || isNoDiceSelected()">
+                Roll selected dice ({{ remainRollCount }}/{{ rollCount }})
+            </button>
         </div>
-        <br/>
-        <button @click="rollDice" :disabled="isNoRemainRollCount() || isNoDiceSelected()">
-            Roll selected dice ({{ remainRollCount }}/{{ rollCount }})
-        </button>
+        <div>
+            <div v-for="(dice, index) in diceList" class="dice" :class="{'vibration': dice.rolling}">
+                <input :id="'dice' + index" type="checkbox" v-model="dice.selected"/>
+                <label :for="'dice' + index">{{ dice.value }}</label>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -31,11 +34,11 @@ export default {
             rollCount: ROLL_COUNT,
             remainRollCount: ROLL_COUNT,
             diceList: [
-                {id: 0, value: 0, selected: true},
-                {id: 1, value: 0, selected: true},
-                {id: 2, value: 0, selected: true},
-                {id: 3, value: 0, selected: true},
-                {id: 4, value: 0, selected: true},
+                {id: 0, value: 0, selected: true, rolling: false},
+                {id: 1, value: 0, selected: true, rolling: false},
+                {id: 2, value: 0, selected: true, rolling: false},
+                {id: 3, value: 0, selected: true, rolling: false},
+                {id: 4, value: 0, selected: true, rolling: false},
             ],
         }
     },
@@ -63,6 +66,13 @@ export default {
             return this.diceList.filter(dice => dice.selected).length === 0
         },
         rollDice() {
+            this.diceList
+                .filter(dice => dice.selected)
+                .forEach(dice => {
+                    dice.rolling = true
+                    setTimeout(() => dice.rolling = false, 400)
+                })
+
             this.remainRollCount--
 
             this.diceList
